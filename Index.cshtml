@@ -1,0 +1,56 @@
+﻿@model IEnumerable<MTesting.Models.Student>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p style="background-color:lightgreen;width:100px;border-radius:20px;height:25px;padding-left: 10px;">
+    @Html.ActionLink("Create New", "Create", "", new {@class="btn btn-primary" })
+</p>
+<table >
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Department
+        </th>
+        <th>
+            Salary
+        </th>
+        <th>
+            IsFullTime
+        </th>
+        <th>
+            Skills
+        </th>
+        <th>Action</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Department)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Salary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsFullTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Skills)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class="btn btn-primary"}) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new {@class="btn btn-danger" ,onclick="return confirm('Are You Saur delete')" })
+        </td>
+    </tr>
+}
+
+</table>

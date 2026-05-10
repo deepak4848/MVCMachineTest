@@ -1,0 +1,71 @@
+﻿@model MTesting.Models.Student
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm("Edit", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" style="margin-left:45%">
+        <h4 >Student</h4>
+        
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+           @Html.LabelFor(model => model.Name)
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+         <div class="editor-label">
+            @Html.LabelFor(model => model.Department)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.Department, (IEnumerable<SelectListItem>)ViewBag.DeptList, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Department)
+        </div>
+       
+         <div class="editor-label">
+            @Html.LabelFor(model => model.Salary)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Salary)
+            @Html.ValidationMessageFor(model => model.Salary)
+        </div>
+       <div class="editor-field">
+            @Html.RadioButtonFor(model => model.IsFullTime, "FullTime") FullTime
+            @Html.RadioButtonFor(model => model.IsFullTime, "PartTime") PartTime
+            @Html.ValidationMessageFor(model => model.IsFullTime)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Skills )
+            <div class="col-md-10">
+                  <input type="checkbox" name="Skills" value="C#" @(Model.Skills.Contains("C#")? "checked" :"") />C#
+                <input type="checkbox" name="Skills" value="Java" @(Model.Skills.Contains("Java")? "checked" :"")/>Java
+              
+                <input type="checkbox" name="Skills" value=".Net"  @(Model.Skills.Contains("Sql")? "checked" :"")/>Sql
+             
+                @Html.ValidationMessageFor(model => model.Skills, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+      
+
+       <br />
+       
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Update" style="background-color:lightgreen;width:100px;border-radius:20px;" />
+                 <span style="background-color:red;width:150px;border-radius:20px;">
+                @Html.ActionLink("Back to List", "Index", "", new { @class = "btn btn-danger" })</span>
+            </div>
+        </div>
+    </div>
+}
